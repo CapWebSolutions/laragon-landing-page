@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vyzyz Projects</title>
+    <title>Laragon Local Development Projects by Cap Web Solutions | Matt Ryan</title>
     <link rel="icon" href="https://www.pngkey.com/png/full/139-1391859_clouds-clipart-clear-background-cloud-vector-transparent-background.png">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,26 +13,44 @@
 </head>
 
 <body>
+<?php
+// Handle recursive call for phpinfo().
+if ( ! empty( $_GET['q'] ) ) {
+    switch ( $_GET['q'] ) {
+        case 'info':
+            phpinfo();
+            exit;
+            break;
+    }
+}
+?>
     <header>
         <a class="logo">
-            <h2>Vyzyz's Projects</h2>
+            <h2>Local Development Projects</h2>
         </a>
         <nav>
             <ul class="nav__links">
-                <li><a href="http://localhost/phpmyadmin/">PhpMyAdmin</a></li>
-                <li><a href="https://github.com/alvinzf">About</a></li>
+                <li><a href="http://localhost/phpmyadmin/" title="PHPMyAdmin">PhpMyAdmin</a></li>
+                <li><a href="https://github.com/capwebsolutions" title="Cap Web Solutions Github Info">Git About</a></li>
+                <li><a href="https://laragon.org/docs" title="Getting Started">Getting Started</a></li>
             </ul>
         </nav>
-        <a class="cta" href="#searchBar">Search</a>
-        <p class="menu cta">Menu</p>
+        <!-- <a class="cta" href="#searchBar">Search</a> -->
+        <!-- <p class="menu cta">Menu</p> -->
+        <div class="info"><br />
+                <strong>Server Details:</strong><br/>
+                <?php print($_SERVER['SERVER_SOFTWARE']); ?><br />
+                PHP version: <?php print phpversion(); ?> <span><a title="phpinfo()" href="/?q=info"> info</a></span><br />
+                Document Root: <?php print($_SERVER['DOCUMENT_ROOT']); ?>
+            </div>
     </header>
-    <div id="mobile__menu" class="overlay">
+    <!-- <div id="mobile__menu" class="overlay">
         <a class="close">&times;</a>
         <div class="overlay__content">
             <a href="http://localhost/phpmyadmin/">PhpMyAdmin</a>
-            <a href="https://github.com/alvinzf">About</a>
+            <a href="https://github.com/capwebsolutions">About</a>
         </div>
-    </div>
+    </div> -->
 
     <script type="text/javascript" src="mobile.js"></script>
     <div class="center" style="margin-left: 100px;">
@@ -61,10 +79,12 @@
                 //show directories on screen
                 function directory_html($value)
                 {
+                $site_name = $value . '.test';
+                $site_name_port = $site_name . ':8443';
                 ?>
                     <div class="directory">
-                        <a href="/<?php echo $value; ?>">
-                            <h3 class="bold"><?php echo $value; ?></h3>
+                        <a href="https://<?php echo $site_name_port . '" target=\"_blank\">'; ?> 
+                            <h3 class='bold'><?php echo $site_name;?></h3>
                         </a>
                     </div>
                 <?php
